@@ -2,12 +2,21 @@
   "name": "ngQuickDate",
   "version": "1.3.0",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-coffee": "~0.7",
-    "grunt-contrib-watch": "~0.5",
-    "grunt-contrib-uglify": "~0.2",
-    "karma": "~0.10",
-    "karma-coffee-preprocessor": "~0.1",
-    "grunt-contrib-less": "~0.8.2"
+    "grunt": "0.4.5",
+    "grunt-contrib-coffee": "0.12.0",
+    "grunt-contrib-watch": "0.6.1",
+    "grunt-contrib-uglify": "0.6.0",
+    "karma": "0.12.23",
+    "karma-coffee-preprocessor": "0.2.1",
+    "grunt-contrib-less": "0.11.4",
+    "grunt-karma": "0.9.0",
+    "karma-phantomjs-launcher": "0.1.4",
+    "karma-failed-reporter": "0.0.2",
+    "karma-spec-reporter": "0.0.13",
+    "karma-jasmine": "0.2.2",
+    "karma-chrome-launcher": "0.1.5"
+  },
+  "scripts": {
+    "test": "grunt test"
   }
 }
