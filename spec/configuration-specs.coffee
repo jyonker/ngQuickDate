@@ -10,7 +10,7 @@ describe "ngQuickDate", ->
         ngQuickDateDefaultsProvider.set('labelFormat', 'yyyy-MM-d')
         null
       ))
-
+      
       describe 'and given a basic datepicker', ->
         beforeEach(angular.mock.inject(($compile, $rootScope) ->
           scope = $rootScope
@@ -26,7 +26,7 @@ describe "ngQuickDate", ->
         ngQuickDateDefaultsProvider.set('dateFormat', 'yy-M-d')
         null
       ))
-
+        
       describe 'and given a basic datepicker', ->
         beforeEach angular.mock.inject ($compile, $rootScope) ->
           element = buildBasicDatepicker($compile, $rootScope, new Date(Date.parse('1/1/2013 1:00 PM')))
@@ -219,6 +219,95 @@ describe "ngQuickDate", ->
         it 'should render abbreviations', ->
           expect($(element).find('.quickdate-calendar thead th').size()).toEqual(7)
 
+    describe 'Given that showWeekNumbers is configured', ->
+      beforeEach(module('ngQuickDate', (ngQuickDateDefaultsProvider) -> 
+        ngQuickDateDefaultsProvider.set('showWeekNumbers', true)
+        null
+      ))
+
+      describe 'and given a datepicker with date 7/3/2014', ->
+        beforeEach(inject(($compile, $rootScope) -> 
+          scope = $rootScope
+          scope.myDate = '7/3/2014'
+          element = $compile("<quick-datepicker ng-model='myDate' />")(scope)
+          scope.$digest()
+        ))
+
+        it 'shows a table for weeks that contains 5 rows', ->
+          $trs = $(element).find('.quickdate-calendar-weeks tbody tr');
+          expect($trs.length).toEqual(5);
+
+        it 'shows first week as 26', ->
+          $td = $(element).find('.quickdate-calendar-weeks tbody tr td:first');
+          expect($td.text()).toEqual('26');
+
+
+    describe 'Given that disableOther is configured', ->
+      beforeEach(module('ngQuickDate', (ngQuickDateDefaultsProvider) -> 
+        ngQuickDateDefaultsProvider.set('disableOther', true)
+        null
+      ))
+
+      describe 'and given a datepicker with date 7/3/2014', ->
+        beforeEach(inject(($compile, $rootScope) -> 
+          scope = $rootScope
+          scope.myDate = '7/3/2014'
+          element = $compile("<quick-datepicker ng-model='myDate' />")(scope)
+          scope.$digest()
+        ))
+
+        it 'shows previous and next month\'s dates as other-month and disabled-date', ->
+          $td = $(element).find('.quickdate-calendar tbody tr td:first');
+          expect($td.hasClass('other-month')).toBeTruthy()
+          expect($td.hasClass('disabled-date')).toBeTruthy()
+
+          $td = $(element).find('.quickdate-calendar tbody tr td:last');
+          expect($td.hasClass('other-month')).toBeTruthy()
+          expect($td.hasClass('disabled-date')).toBeTruthy()
+
+    describe 'Given that disableOther is not configured', ->
+      beforeEach(module('ngQuickDate', (ngQuickDateDefaultsProvider) -> 
+        ngQuickDateDefaultsProvider.set('disableOther', false)
+        null
+      ))
+
+      describe 'and given a datepicker with date 7/3/2014', ->
+        beforeEach(inject(($compile, $rootScope) -> 
+          scope = $rootScope
+          scope.myDate = '7/3/2014'
+          element = $compile("<quick-datepicker ng-model='myDate' />")(scope)
+          scope.$digest()
+        ))
+
+        it 'shows previous and next month\'s dates only as other-month', ->
+          $td = $(element).find('.quickdate-calendar tbody tr td:first');
+          expect($td.hasClass('other-month')).toBeTruthy()
+          expect($td.hasClass('disabled-date')).toBeFalsy()
+
+          $td = $(element).find('.quickdate-calendar tbody tr td:last');
+          expect($td.hasClass('other-month')).toBeTruthy()
+          expect($td.hasClass('disabled-date')).toBeFalsy()
+
+    describe 'Given that disableOther is configured', ->
+      beforeEach(module('ngQuickDate', (ngQuickDateDefaultsProvider) -> 
+        ngQuickDateDefaultsProvider.set('disableOther', true)
+        null
+      ))
+
+      describe 'and given a datepicker with date 7/3/2014', ->
+        beforeEach(inject(($compile, $rootScope) -> 
+          scope = $rootScope
+          scope.myDate = new Date(2014, 6, 3)
+          element = $compile("<quick-datepicker ng-model='myDate' />")(scope)
+          scope.$digest()
+        ))
+
+        it 'clicking on a disabled date does not change the model value', ->
+          $td = $(element).find('.quickdate-calendar tbody tr td:first');
+          browserTrigger($td, 'click')
+          scope.$apply()
+          expect(scope.myDate).toEqual(new Date(2014, 6, 3))
+
     xdescribe 'Given that a default time of 1:52 am is configured', ->
       beforeEach(module('ngQuickDate', (ngQuickDateDefaultsProvider) ->
         ngQuickDateDefaultsProvider.set('defaultTime', '01:52')
@@ -238,9 +327,6 @@ describe "ngQuickDate", ->
             scope.$apply()
           it 'should set the time input to 1:52 AM', ->
             expect($(element).find('.quickdate-time-input').val()).toEqual('1:52 AM')
-
-
-
 
 buildBasicDatepicker = ($compile, scope, date=new Date(), debug=false) ->
   scope.myDate = date
