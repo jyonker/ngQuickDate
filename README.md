@@ -1,4 +1,5 @@
 # ngQuickDate
+[![Build Status](https://travis-ci.org/jyonker/ngQuickDate.svg?branch=master)](https://travis-ci.org/jyonker/ngQuickDate)
 
 ngQuickDate is an [Angular.js](http://angularjs.org/) Date/Time picker directive. It stresses speed of data entry and simplicity while being highly configurable and easy to re-style.
 
