@@ -97,6 +97,7 @@ app.config(function(ngQuickDateDefaultsProvider) {
 | all inline options  | see above table  | Note that they must be in camelCase form.                                                           |
 | buttonIconHtml      | null             | If you want to set a default button icon, set it to something like `<i class='icon-calendar'></i>`  |
 | closeButtonHtml     | 'X'              | By default, the close button is just an X character. You may set it to an icon similar to `buttonIconHtml` |
+| clearButtonHtml     | 'Clear'          | By default, the clear button just contains the word clear. You may set it to an icon similar to `buttonIconHtml` |
 | nextLinkHtml        | 'Next'           | By default, the next month link is just text. You may set it to an icon or image.                   |
 | prevLinkHtml        | 'Prev'           | By default, the previous month link is just text. You may set it to an icon or image.               |
 | dayAbbreviations    | (see below)      | The day abbreviations used in the top row of the calendar.                                          |
@@ -170,6 +171,7 @@ app.config(function(ngQuickDateDefaultsProvider) {
   // Configure with icons from font-awesome
   return ngQuickDateDefaultsProvider.set({
     closeButtonHtml: "<i class='fa fa-times'></i>",
+    clearButtonHtml: "<i class='fa fa-trash'></i>",
     buttonIconHtml: "<i class='fa fa-calendar'></i>",
     nextLinkHtml: "<i class='fa fa-chevron-right'></i>",
     prevLinkHtml: "<i class='fa fa-chevron-left'></i>"
