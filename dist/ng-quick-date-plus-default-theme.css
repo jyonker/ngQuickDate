@@ -53,26 +53,17 @@ a.quickdate-next-month {
 .quickdate-text-inputs {
   text-align: left;
   margin-bottom: 5px;
-  display: table;
-  table-layout: fixed;
-  width: 100%;
 }
 .quickdate-input-wrapper {
-  display: table-cell;
-  padding-left: 2px;
-}
-.quickdate-input-wrapper:first-child {
-  padding-left: 0;
+  width: 48%;
+  display: inline-block;
 }
 input.quickdate-date-input,
 input.quickdate-time-input {
-  width: 100%;
+  width: 100px;
   margin: 0;
   height: auto;
   padding: 2px 3px;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
 }
 table.quickdate-calendar {
   border-collapse: collapse;
@@ -86,16 +77,6 @@ table.quickdate-calendar td {
 }
 table.quickdate-calendar td:hover {
   cursor: pointer;
-}
-table.quickdate-calendar-weeks {
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin-top: 5px;
-  margin-right: 10px;
-}
-table.quickdate-calendar-weeks th,
-table.quickdate-calendar-weeks td {
-  padding: 5px;
 }
 .quickdate-popup-footer {
   text-align: right;
@@ -157,23 +138,14 @@ table.quickdate-calendar-weeks td {
 .quickdate-prev-month i {
   padding-right: 10px;
 }
-table.quickdate-calendar-wrapper {
-  width: 100%;
-}
-table.quickdate-calendar-weeks {
-  border: none;
-}
-table.quickdate-calendar-weeks td {
-  border: 1px solid #ccc;
-  background-color: #ffffff;
-}
 table.quickdate-calendar {
-  border: none;
+  border: solid 1px #ccc;
+  background-color: #ffffff;
 }
 table.quickdate-calendar th,
 table.quickdate-calendar td {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 table.quickdate-calendar td:hover {
   background-color: #e6e6e6;

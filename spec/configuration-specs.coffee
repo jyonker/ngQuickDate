@@ -10,7 +10,7 @@ describe "ngQuickDate", ->
         ngQuickDateDefaultsProvider.set('labelFormat', 'yyyy-MM-d')
         null
       ))
-      
+
       describe 'and given a basic datepicker', ->
         beforeEach(angular.mock.inject(($compile, $rootScope) ->
           scope = $rootScope
@@ -26,7 +26,7 @@ describe "ngQuickDate", ->
         ngQuickDateDefaultsProvider.set('dateFormat', 'yy-M-d')
         null
       ))
-        
+
       describe 'and given a basic datepicker', ->
         beforeEach angular.mock.inject ($compile, $rootScope) ->
           element = buildBasicDatepicker($compile, $rootScope, new Date(Date.parse('1/1/2013 1:00 PM')))
@@ -218,29 +218,6 @@ describe "ngQuickDate", ->
 
         it 'should render abbreviations', ->
           expect($(element).find('.quickdate-calendar thead th').size()).toEqual(7)
-
-    describe 'Given that showWeekNumbers is configured', ->
-      beforeEach(module('ngQuickDate', (ngQuickDateDefaultsProvider) -> 
-        ngQuickDateDefaultsProvider.set('showWeekNumbers', true)
-        null
-      ))
-
-      describe 'and given a datepicker with date 7/3/2014', ->
-        beforeEach(inject(($compile, $rootScope) -> 
-          scope = $rootScope
-          scope.myDate = '7/3/2014'
-          element = $compile("<quick-datepicker ng-model='myDate' />")(scope)
-          scope.$digest()
-        ))
-
-        it 'shows a table for weeks that contains 5 rows', ->
-          $trs = $(element).find('.quickdate-calendar-weeks tbody tr');
-          expect($trs.length).toEqual(5);
-
-        it 'shows first week as 26', ->
-          $td = $(element).find('.quickdate-calendar-weeks tbody tr td:first');
-          expect($td.text()).toEqual('26');
-
 
     describe 'Given that disableOther is configured', ->
       beforeEach(module('ngQuickDate', (ngQuickDateDefaultsProvider) -> 

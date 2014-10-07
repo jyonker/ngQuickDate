@@ -74,7 +74,6 @@ There are a number of options that be configured inline with attributes. Here ar
 | default-time         | null                | Time that will be set when you click on a date on the calendar. Must be in 24-hour format.  |
 | init-value           | null                | Set the initial value of the date inline as a string. Will be immediately parsed and set as the value of your model.|
 | date-filter          | null                | Set to a function to enable/disable dates. Useful for disabling weekends, etc. [See more below](#date-filter-function) |
-| show-week-numbers    | false               | If true, show week numbers in the calendar.                                                 |
 | min-date             | null                | If set, denotes the minimum date allowed to be selected. Dates before minDate will be disabled |
 | max-date             | null                | If set, denotes the maximum date allowed to be selected. Dates after maxDate will be disabled |
 

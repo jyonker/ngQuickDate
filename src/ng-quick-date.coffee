@@ -26,7 +26,6 @@ app.provider "ngQuickDateDefaults", ->
       disableOther: false,
       disableTimepicker: false
       disableClearButton: false,
-      showWeekNumbers: false,
       defaultTime: null
       dayAbbreviations: ["Su", "M", "Tu", "W", "Th", "F", "Sa"],
       dateFilter: null,
@@ -94,41 +93,6 @@ app.directive "quickDatepicker", ['ngQuickDateDefaults', '$filter', '$sce', (ngQ
       if attrs.iconClass && attrs.iconClass.length
         scope.buttonIconHtml = $sce.trustAsHtml("<i ng-show='iconClass' class='#{attrs.iconClass}'></i>")
 
-    # ISO 8601 Week Number
-    # ================================
-
-    # Taken from http://techblog.procurios.nl/k/news/view/33796/14863/calculate-iso-8601-week-and-year-in-javascript.html
-    # Calculates ISO 8601 week number from given date.
-    getWeek = (date) ->
-      # Create a copy of date object  
-      target  = new Date(date.valueOf())
-  
-      # ISO week date weeks start on Monday  
-      # so correct the day number  
-      dayNr = (date.getDay() + 6) % 7
-  
-      # ISO 8601 states that week 1 is the week  
-      # with the first Thursday of that year.  
-      # Set the target date to the Thursday in the target week  
-      target.setDate(target.getDate() - dayNr + 3)  
-    
-      # Store the millisecond value of the target date  
-      firstThursday = target.valueOf()  
-    
-      # Set the target to the first Thursday of the year  
-      # First set the target to January first  
-      target.setMonth(0, 1)
-      
-      # Not a Thursday? Correct the date to the next Thursday  
-      if target.getDay() != 4
-          target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7)
-    
-      # The weeknumber is the number of weeks between the   
-      # first Thursday of the year and the Thursday in the target week  
-
-      return 1 + Math.ceil((firstThursday - target) / 604800000); # 604800000 = 7 * 24 * 3600 * 1000  
-
-
     # VIEW SETUP
     # ================================
 
@@ -182,11 +146,9 @@ app.directive "quickDatepicker", ['ngQuickDateDefaults', '$filter', '$sce', (ngQ
       daysInMonth = getDaysInMonth(scope.calendarDate.getFullYear(), scope.calendarDate.getMonth())
       numRows = Math.ceil((offset + daysInMonth) / 7)
       weeks = []
-      weekNumbers = []
       curDate = new Date(scope.calendarDate.getFullYear(), scope.calendarDate.getMonth(), scope.calendarDate.getDate())
       curDate.setDate(curDate.getDate() + (offset * -1))
       for row in [0..(numRows-1)]
-        weekNumbers.push(getWeek(curDate))
         weeks.push([])
         for day in [0..6]
           d = new Date(curDate)
@@ -199,7 +161,6 @@ app.directive "quickDatepicker", ['ngQuickDateDefaults', '$filter', '$sce', (ngQ
           today = datesAreEqual(d, new Date())
           weeks[row].push({
             date: d
-            week: getWeek(d)
             selected: selected
             disabled: (if (typeof(scope.dateFilter) == 'function') then !scope.dateFilter(d) else false) || (scope.disableOther && d.getMonth() != scope.calendarDate.getMonth()) || (scope.minDate && d < scope.minDate) || (scope.maxDate && d > scope.maxDate) 
             other: d.getMonth() != scope.calendarDate.getMonth()
@@ -208,7 +169,6 @@ app.directive "quickDatepicker", ['ngQuickDateDefaults', '$filter', '$sce', (ngQ
           curDate.setDate(curDate.getDate() + 1)
 
       scope.weeks = weeks
-      scope.weekNumbers = weekNumbers
 
     # PARSERS AND FORMATTERS
     # =================================
@@ -427,23 +387,6 @@ app.directive "quickDatepicker", ['ngQuickDateDefaults', '$filter', '$sce', (ngQ
                   <span class='quickdate-month'>{{calendarDate | date:'MMMM yyyy'}}</span>
                   <a href='' class='quickdate-next-month quickdate-action-link' ng-click='nextMonth()' tabindex='-1' ><div ng-bind-html='nextLinkHtml'></div></a>
                 </div>
-                <table class='quickdate-calendar-wrapper'>
-                  <tr>
-                    <td ng-show='showWeekNumbers'>
-                      <table class='quickdate-calendar-weeks'> 
-                        <thead>
-                          <tr>
-                            <th>&nbsp;</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr ng-repeat='week in weekNumbers'>
-                            <td>{{week}}</td>
-                          </tr>
-                        </tbody>                      
-                      </table>
-                    </td>
-                    <td>
                       <table class='quickdate-calendar'>
                         <thead>
                           <tr>
@@ -455,9 +398,6 @@ app.directive "quickDatepicker", ['ngQuickDateDefaults', '$filter', '$sce', (ngQ
                             <td ng-mousedown='selectDate(day.date, true, day.disabled)' ng-click='$event.preventDefault()' ng-class='{"other-month": day.other, "disabled-date": day.disabled, "selected": day.selected, "is-today": day.today}' ng-repeat='day in week'>{{day.date | date:'d'}}</td>
                           </tr>
                         </tbody>
-                      </table>
-                    </td>
-                  </tr>
                 </table>
                 <div class='quickdate-popup-footer'>
                   <a href='' class='quickdate-clear' tabindex='-1' ng-hide='disableClearButton' ng-click='clear()' ng-bind-html="clearButtonHtml"></a>
