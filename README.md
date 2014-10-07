@@ -1,10 +1,4 @@
-## Notice:
-
-Sorry for the lack of updates lately. After using this directive in my own app, I realized it was lacking in a few fundamental ways, so I started on a new datepicker that is different enough that it called for a completely separate repo. I should have something up on Github soon.
-
-In the meantime, if someone would like to help maintain this project, please let me know.
-
----
+This is an attempt to provide some maintenance for adamalbrecht's fantastic project ngQuickDate. This fork introduces an upgraded build and test system as well as CI. Pull requests from the original project will be merged here provided they include tests and are not so specific to one developer's use case as to be useless to the rest of the community.
 
 # ngQuickDate
 [![Build Status](https://travis-ci.org/jyonker/ngQuickDate.svg?branch=master)](https://travis-ci.org/jyonker/ngQuickDate)
