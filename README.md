@@ -1,3 +1,11 @@
+## Notice:
+
+Sorry for the lack of updates lately. After using this directive in my own app, I realized it was lacking in a few fundamental ways, so I started on a new datepicker that is different enough that it called for a completely separate repo. I should have something up on Github soon.
+
+In the meantime, if someone would like to help maintain this project, please let me know.
+
+---
+
 # ngQuickDate
 
 ngQuickDate is an [Angular.js](http://angularjs.org/) Date/Time picker directive. It stresses speed of data entry and simplicity while being highly configurable and easy to re-style.
@@ -6,7 +14,7 @@ ngQuickDate is an [Angular.js](http://angularjs.org/) Date/Time picker directive
 
 ## Download
 
-* [Version 1.3.0](https://github.com/adamalbrecht/ngQuickDate/archive/1.3.0.zip)
+* [Version 1.3.2](https://github.com/adamalbrecht/ngQuickDate/archive/1.3.2.zip)
 
 * Only compatible with Angular 1.2.x. For a version compatible with Angular 1.0.x, checkout the angular-1.0 branch.
 
