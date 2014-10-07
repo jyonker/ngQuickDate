@@ -1,4 +1,4 @@
-This is an attempt to provide some maintenance for adamalbrecht's fantastic project ngQuickDate. This fork introduces an upgraded build and test system as well as CI. Pull requests from the original project will be merged here provided they include tests and are not so specific to one developer's use case as to be useless to the rest of the community.
+This is an attempt to provide some maintenance for [adamalbrecht](https://github.com/adamalbrecht/)'s fantastic project [ngQuickDate](https://github.com/adamalbrecht/ngQuickDate/). This fork introduces an upgraded build and test system as well as CI. Pull requests from the original project will be merged here provided they include tests and are not so specific to one developer's use case as to be useless to the rest of the community.
 
 # ngQuickDate
 [![Build Status](https://travis-ci.org/jyonker/ngQuickDate.svg?branch=master)](https://travis-ci.org/jyonker/ngQuickDate)
